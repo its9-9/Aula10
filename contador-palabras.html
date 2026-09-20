@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contador de Palabras y Caracteres Online Gratis | Aula10</title>
+<meta name="description" content="Cuenta palabras, caracteres, frases, párrafos y tiempo de lectura de tu texto o trabajo al instante. Gratis, sin registro y sin límite de longitud.">
+<link rel="canonical" href="https://tu-usuario.github.io/aula10/contador-palabras.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contador de Palabras y Caracteres | Aula10">
+<meta property="og:description" content="Cuenta palabras, caracteres, frases y tiempo de lectura al instante.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  #textInput{min-height:280px;font-size:16px;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo">Aula<span class="dot">10</span></a>
+    <nav class="mainnav">
+      <a href="calculadora.html">Calculadora</a>
+      <a href="ruleta.html">Ruleta</a>
+      <a href="contador-palabras.html" class="active">Contador</a>
+      <a href="resumidor-texto.html">Resumidor</a>
+      <a href="nota-media.html">Nota media</a>
+      <a href="citas.html">Citas</a>
+      <a href="pomodoro.html">Pomodoro</a>
+      <a href="conversor-notas.html">Conversor notas</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:32px;">
+  <p class="crumb"><a href="index.html">Inicio</a> / Contador de palabras</p>
+  <h1 style="font-size:30px;">Contador de palabras y caracteres</h1>
+  <p style="max-width:60ch;">Pega o escribe tu texto y verás el recuento actualizarse en tiempo real. Útil para trabajos con límite de palabras, redes sociales o resúmenes.</p>
+</div>
+
+<div class="wrap" style="padding-bottom:56px;">
+  <div class="card">
+    <textarea id="textInput" placeholder="Pega o escribe aquí tu texto..."></textarea>
+    <div class="stat-row">
+      <div class="stat-chip"><div class="n" id="statWords">0</div><div class="l">Palabras</div></div>
+      <div class="stat-chip"><div class="n" id="statCharsSp">0</div><div class="l">Caracteres (con espacios)</div></div>
+      <div class="stat-chip"><div class="n" id="statCharsNoSp">0</div><div class="l">Caracteres (sin espacios)</div></div>
+      <div class="stat-chip"><div class="n" id="statSentences">0</div><div class="l">Frases</div></div>
+      <div class="stat-chip"><div class="n" id="statParagraphs">0</div><div class="l">Párrafos</div></div>
+      <div class="stat-chip"><div class="n" id="statReading">0 min</div><div class="l">Lectura estimada</div></div>
+    </div>
+  </div>
+</div>
+
+<section class="block wrap">
+  <h2>Preguntas frecuentes</h2>
+  <div class="faq">
+    <details>
+      <summary>¿Cómo se calcula el tiempo de lectura?</summary>
+      <p>Se estima sobre una velocidad media de lectura de 200 palabras por minuto en español, redondeando siempre hacia arriba.</p>
+    </details>
+    <details>
+      <summary>¿Se guarda el texto que escribo?</summary>
+      <p>No, el recuento se hace en tu propio navegador y el texto nunca se envía a ningún servidor.</p>
+    </details>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Herramientas</h4><ul>
+        <li><a href="calculadora.html">Calculadora</a></li>
+        <li><a href="ruleta.html">Ruleta aleatoria</a></li>
+        <li><a href="contador-palabras.html">Contador de palabras</a></li>
+        <li><a href="resumidor-texto.html">Resumidor de textos</a></li>
+      </ul></div>
+      <div><h4>Más herramientas</h4><ul>
+        <li><a href="nota-media.html">Calculadora de nota media</a></li>
+        <li><a href="citas.html">Generador de citas APA/MLA</a></li>
+        <li><a href="pomodoro.html">Temporizador Pomodoro</a></li>
+        <li><a href="conversor-notas.html">Conversor de notas</a></li>
+      </ul></div>
+      <div><h4>Aula10</h4><ul><li><a href="index.html">Inicio</a></li></ul></div>
+    </div>
+    <p class="fine">Aula10 — herramientas gratuitas para estudiantes.</p>
+  </div>
+</footer>
+
+<script>
+const input = document.getElementById("textInput");
+function update(){
+  const text = input.value;
+  const words = text.trim().length ? text.trim().split(/\s+/) : [];
+  const charsSp = text.length;
+  const charsNoSp = text.replace(/\s/g,"").length;
+  const sentences = text.split(/[.!?]+/).map(s=>s.trim()).filter(Boolean);
+  const paragraphs = text.split(/\n+/).map(p=>p.trim()).filter(Boolean);
+  const readingMin = Math.max(1, Math.ceil(words.length/200));
+
+  document.getElementById("statWords").textContent = words.length;
+  document.getElementById("statCharsSp").textContent = charsSp;
+  document.getElementById("statCharsNoSp").textContent = charsNoSp;
+  document.getElementById("statSentences").textContent = sentences.length;
+  document.getElementById("statParagraphs").textContent = paragraphs.length;
+  document.getElementById("statReading").textContent = (text.trim()? readingMin : 0) + " min";
+}
+input.addEventListener("input", update);
+update();
+</script>
+
+</body>
+</html>

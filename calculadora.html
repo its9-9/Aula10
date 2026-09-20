@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora Online Gratis — Suma, Resta, Porcentajes | Aula10</title>
+<meta name="description" content="Calculadora online gratuita y sin registro. Suma, resta, multiplica, divide y calcula porcentajes al instante desde el navegador, en el móvil o el ordenador.">
+<link rel="canonical" href="https://tu-usuario.github.io/aula10/calculadora.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculadora Online Gratis | Aula10">
+<meta property="og:description" content="Suma, resta, multiplica, divide y calcula porcentajes al instante. Gratis, sin registro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .calc-wrap{max-width:360px;margin:0 auto;}
+  .calc-screen{
+    background:var(--ink);color:#fff;border-radius:var(--radius);
+    padding:26px 20px;text-align:right;margin-bottom:14px;
+  }
+  .calc-prev{font-size:13px;color:#B7BECF;min-height:16px;overflow-x:auto;white-space:nowrap;}
+  .calc-current{font-family:'Sora',sans-serif;font-weight:700;font-size:38px;overflow-x:auto;white-space:nowrap;}
+  .calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;}
+  .calc-btn{
+    border:none;border-radius:var(--radius-sm);padding:18px 0;font-size:18px;font-weight:600;
+    background:#fff;border:1.5px solid var(--line);cursor:pointer;color:var(--ink);
+  }
+  .calc-btn:active{background:var(--bg);}
+  .calc-btn.op{background:#FCEFE0;color:var(--accent-dark);font-weight:700;}
+  .calc-btn.eq{background:var(--ink);color:#fff;grid-column:span 2;}
+  .calc-btn.wide{grid-column:span 2;}
+  .calc-btn.fn{color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo">Aula<span class="dot">10</span></a>
+    <nav class="mainnav">
+      <a href="calculadora.html" class="active">Calculadora</a>
+      <a href="ruleta.html">Ruleta</a>
+      <a href="contador-palabras.html">Contador</a>
+      <a href="resumidor-texto.html">Resumidor</a>
+      <a href="nota-media.html">Nota media</a>
+      <a href="citas.html">Citas</a>
+      <a href="pomodoro.html">Pomodoro</a>
+      <a href="conversor-notas.html">Conversor notas</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:32px;">
+  <p class="crumb"><a href="index.html">Inicio</a> / Calculadora</p>
+  <h1 style="font-size:30px;">Calculadora online</h1>
+  <p style="max-width:60ch;">Suma, resta, multiplica, divide y calcula porcentajes directamente aquí, sin descargar nada ni crear cuenta.</p>
+</div>
+
+<div class="wrap" style="padding-bottom:56px;">
+  <div class="calc-wrap card">
+    <div class="calc-screen">
+      <div class="calc-prev" id="calcPrev">&nbsp;</div>
+      <div class="calc-current" id="calcCurrent">0</div>
+    </div>
+    <div class="calc-grid">
+      <button class="calc-btn fn" data-action="clear">C</button>
+      <button class="calc-btn fn" data-action="sign">+/-</button>
+      <button class="calc-btn fn" data-action="percent">%</button>
+      <button class="calc-btn op" data-action="op" data-op="÷">÷</button>
+
+      <button class="calc-btn" data-action="digit">7</button>
+      <button class="calc-btn" data-action="digit">8</button>
+      <button class="calc-btn" data-action="digit">9</button>
+      <button class="calc-btn op" data-action="op" data-op="×">×</button>
+
+      <button class="calc-btn" data-action="digit">4</button>
+      <button class="calc-btn" data-action="digit">5</button>
+      <button class="calc-btn" data-action="digit">6</button>
+      <button class="calc-btn op" data-action="op" data-op="−">−</button>
+
+      <button class="calc-btn" data-action="digit">1</button>
+      <button class="calc-btn" data-action="digit">2</button>
+      <button class="calc-btn" data-action="digit">3</button>
+      <button class="calc-btn op" data-action="op" data-op="+">+</button>
+
+      <button class="calc-btn wide" data-action="digit">0</button>
+      <button class="calc-btn" data-action="decimal">,</button>
+      <button class="calc-btn eq" data-action="equals">=</button>
+    </div>
+  </div>
+</div>
+
+<section class="block wrap">
+  <h2>Preguntas frecuentes</h2>
+  <div class="faq">
+    <details>
+      <summary>¿Esta calculadora guarda lo que escribo?</summary>
+      <p>No. Todo el cálculo ocurre en tu propio navegador; no se envía ni se guarda ningún dato en ningún servidor.</p>
+    </details>
+    <details>
+      <summary>¿Cómo calculo un porcentaje?</summary>
+      <p>Escribe el número, pulsa "%" para convertirlo en su valor porcentual, y combínalo con otra operación. Por ejemplo, para calcular el 20% de 50, escribe 50, luego ×, luego 20, luego %.</p>
+    </details>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Herramientas</h4><ul>
+        <li><a href="calculadora.html">Calculadora</a></li>
+        <li><a href="ruleta.html">Ruleta aleatoria</a></li>
+        <li><a href="contador-palabras.html">Contador de palabras</a></li>
+        <li><a href="resumidor-texto.html">Resumidor de textos</a></li>
+      </ul></div>
+      <div><h4>Más herramientas</h4><ul>
+        <li><a href="nota-media.html">Calculadora de nota media</a></li>
+        <li><a href="citas.html">Generador de citas APA/MLA</a></li>
+        <li><a href="pomodoro.html">Temporizador Pomodoro</a></li>
+        <li><a href="conversor-notas.html">Conversor de notas</a></li>
+      </ul></div>
+      <div><h4>Aula10</h4><ul><li><a href="index.html">Inicio</a></li></ul></div>
+    </div>
+    <p class="fine">Aula10 — herramientas gratuitas para estudiantes. Todo se calcula en tu propio navegador.</p>
+  </div>
+</footer>
+
+<script>
+let current = "0";
+let previous = "";
+let operator = null;
+let justEvaluated = false;
+
+const currentEl = document.getElementById("calcCurrent");
+const prevEl = document.getElementById("calcPrev");
+
+function render(){
+  currentEl.textContent = current;
+  prevEl.textContent = previous && operator ? `${previous} ${operator}` : "\u00A0";
+}
+
+function inputDigit(d){
+  if(justEvaluated){ current = "0"; justEvaluated = false; }
+  current = current === "0" ? d : current + d;
+}
+function inputDecimal(){
+  if(justEvaluated){ current = "0"; justEvaluated = false; }
+  if(!current.includes(",")) current += ",";
+}
+function setOperator(op){
+  if(operator && !justEvaluated){ evaluate(); }
+  previous = current;
+  operator = op;
+  current = "0";
+  justEvaluated = false;
+}
+function toNumber(str){ return parseFloat(str.replace(",", ".")); }
+function formatResult(n){
+  if(!isFinite(n)) return "Error";
+  let s = Math.round(n * 1e10) / 1e10;
+  return s.toString().replace(".", ",");
+}
+function evaluate(){
+  if(operator === null || previous === "") return;
+  const a = toNumber(previous);
+  const b = toNumber(current);
+  let result;
+  switch(operator){
+    case "+": result = a + b; break;
+    case "−": result = a - b; break;
+    case "×": result = a * b; break;
+    case "÷": result = b === 0 ? NaN : a / b; break;
+    default: return;
+  }
+  current = formatResult(result);
+  previous = "";
+  operator = null;
+  justEvaluated = true;
+}
+function clearAll(){
+  current = "0"; previous = ""; operator = null; justEvaluated = false;
+}
+function toggleSign(){
+  if(current === "0") return;
+  current = current.startsWith("-") ? current.slice(1) : "-" + current;
+}
+function toPercent(){
+  current = formatResult(toNumber(current) / 100);
+}
+
+document.querySelectorAll(".calc-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const action = btn.dataset.action;
+    if(action === "digit") inputDigit(btn.textContent.trim());
+    else if(action === "decimal") inputDecimal();
+    else if(action === "op") setOperator(btn.dataset.op);
+    else if(action === "equals") evaluate();
+    else if(action === "clear") clearAll();
+    else if(action === "sign") toggleSign();
+    else if(action === "percent") toPercent();
+    render();
+  });
+});
+
+// Soporte de teclado
+window.addEventListener("keydown", (e) => {
+  if(e.key >= "0" && e.key <= "9"){ inputDigit(e.key); render(); }
+  else if(e.key === "."||e.key===","){ inputDecimal(); render(); }
+  else if(["+","-","*","/"].includes(e.key)){
+    const map = {"+":"+","-":"−","*":"×","/":"÷"};
+    setOperator(map[e.key]); render();
+  }
+  else if(e.key === "Enter" || e.key === "="){ evaluate(); render(); }
+  else if(e.key === "Escape"){ clearAll(); render(); }
+  else if(e.key === "Backspace"){
+    current = current.length > 1 ? current.slice(0,-1) : "0";
+    render();
+  }
+});
+
+render();
+</script>
+
+</body>
+</html>

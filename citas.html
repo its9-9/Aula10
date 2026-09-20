@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de Citas APA y MLA Online Gratis | Aula10</title>
+<meta name="description" content="Genera citas bibliográficas en formato APA 7 y MLA 9 para libros, páginas web y artículos de revista. Rellena el formulario y copia la cita ya formateada.">
+<link rel="canonical" href="https://tu-usuario.github.io/aula10/citas.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Generador de Citas APA y MLA | Aula10">
+<meta property="og:description" content="Genera citas en formato APA 7 y MLA 9 en segundos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .cite-out{margin-bottom:16px;}
+  .cite-out h4{font-family:'Sora',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-soft);margin-bottom:8px;}
+  .cite-out .box{background:#FAFBFC;border:1.5px dashed var(--line);border-radius:var(--radius-sm);padding:14px 16px;font-size:15px;line-height:1.6;}
+  .hidden-field{display:none;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo">Aula<span class="dot">10</span></a>
+    <nav class="mainnav">
+      <a href="calculadora.html">Calculadora</a>
+      <a href="ruleta.html">Ruleta</a>
+      <a href="contador-palabras.html">Contador</a>
+      <a href="resumidor-texto.html">Resumidor</a>
+      <a href="nota-media.html">Nota media</a>
+      <a href="citas.html" class="active">Citas</a>
+      <a href="pomodoro.html">Pomodoro</a>
+      <a href="conversor-notas.html">Conversor notas</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:32px;">
+  <p class="crumb"><a href="index.html">Inicio</a> / Generador de citas APA/MLA</p>
+  <h1 style="font-size:30px;">Generador de citas APA y MLA</h1>
+  <p style="max-width:64ch;">Rellena los datos de tu fuente y obtén la cita ya formateada en los dos estilos más usados en trabajos académicos.</p>
+</div>
+
+<div class="wrap" style="padding-bottom:56px;">
+  <div class="grid-2">
+    <div class="card">
+      <div class="field">
+        <label for="tipoFuente">Tipo de fuente</label>
+        <select id="tipoFuente">
+          <option value="libro">Libro</option>
+          <option value="web">Página web</option>
+          <option value="articulo">Artículo de revista académica</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="autor">Autor (Apellido, Nombre)</label>
+        <input type="text" id="autor" placeholder="García, María">
+      </div>
+      <div class="field">
+        <label for="anio">Año</label>
+        <input type="text" id="anio" placeholder="2024">
+      </div>
+      <div class="field">
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" placeholder="Título del libro, página o artículo">
+      </div>
+      <div class="field">
+        <label id="fuenteLabel" for="fuente">Editorial</label>
+        <input type="text" id="fuente" placeholder="Nombre de la editorial">
+      </div>
+      <div class="field hidden-field" id="volNumField">
+        <label for="volNum">Volumen y número (ej. 12(3))</label>
+        <input type="text" id="volNum" placeholder="12(3)">
+      </div>
+      <div class="field hidden-field" id="paginasField">
+        <label for="paginas">Páginas (ej. 45-60)</label>
+        <input type="text" id="paginas" placeholder="45-60">
+      </div>
+      <div class="field hidden-field" id="urlField">
+        <label for="url">URL</label>
+        <input type="text" id="url" placeholder="https://...">
+      </div>
+      <button class="btn block" id="generarBtn">Generar cita</button>
+      <p class="note" id="apaNote">Para un APA estrictamente correcto, escribe el nombre de pila como inicial (ej. "García, M.").</p>
+    </div>
+
+    <div class="card">
+      <div class="cite-out">
+        <h4>Formato APA (7ª edición)</h4>
+        <div class="box" id="apaOut">Rellena el formulario y pulsa "Generar cita".</div>
+        <button class="btn secondary small" data-copy="apaOut" style="margin-top:8px;">Copiar APA</button>
+      </div>
+      <div class="cite-out">
+        <h4>Formato MLA (9ª edición)</h4>
+        <div class="box" id="mlaOut">Rellena el formulario y pulsa "Generar cita".</div>
+        <button class="btn secondary small" data-copy="mlaOut" style="margin-top:8px;">Copiar MLA</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="block wrap">
+  <h2>Preguntas frecuentes</h2>
+  <div class="faq">
+    <details>
+      <summary>¿Qué diferencia hay entre APA y MLA?</summary>
+      <p>APA se usa sobre todo en ciencias sociales y pone el año justo después del autor; MLA se usa más en humanidades y pone el año al final, junto a la editorial o la fuente.</p>
+    </details>
+    <details>
+      <summary>¿Esta herramienta cubre todos los casos posibles?</summary>
+      <p>Cubre los tres casos más comunes en un trabajo de instituto o universidad (libro, página web y artículo). Para casos especiales (varios autores, capítulos de libro, tesis...) consulta la guía oficial de tu universidad o de la APA/MLA.</p>
+    </details>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Herramientas</h4><ul>
+        <li><a href="calculadora.html">Calculadora</a></li>
+        <li><a href="ruleta.html">Ruleta aleatoria</a></li>
+        <li><a href="contador-palabras.html">Contador de palabras</a></li>
+        <li><a href="resumidor-texto.html">Resumidor de textos</a></li>
+      </ul></div>
+      <div><h4>Más herramientas</h4><ul>
+        <li><a href="nota-media.html">Calculadora de nota media</a></li>
+        <li><a href="citas.html">Generador de citas APA/MLA</a></li>
+        <li><a href="pomodoro.html">Temporizador Pomodoro</a></li>
+        <li><a href="conversor-notas.html">Conversor de notas</a></li>
+      </ul></div>
+      <div><h4>Aula10</h4><ul><li><a href="index.html">Inicio</a></li></ul></div>
+    </div>
+    <p class="fine">Aula10 — herramientas gratuitas para estudiantes.</p>
+  </div>
+</footer>
+
+<script>
+const tipoFuente = document.getElementById("tipoFuente");
+const fuenteLabel = document.getElementById("fuenteLabel");
+const volNumField = document.getElementById("volNumField");
+const paginasField = document.getElementById("paginasField");
+const urlField = document.getElementById("urlField");
+
+function toggleFields(){
+  const t = tipoFuente.value;
+  volNumField.classList.toggle("hidden-field", t !== "articulo");
+  paginasField.classList.toggle("hidden-field", t !== "articulo");
+  urlField.classList.toggle("hidden-field", t !== "web");
+  fuenteLabel.textContent = t === "libro" ? "Editorial" : t === "web" ? "Nombre del sitio web" : "Nombre de la revista";
+}
+tipoFuente.addEventListener("change", toggleFields);
+toggleFields();
+
+function val(id){ return document.getElementById(id).value.trim(); }
+
+function generar(){
+  const tipo = tipoFuente.value;
+  const autor = val("autor") || "Apellido, Nombre";
+  const anio = val("anio") || "s.f.";
+  const titulo = val("titulo") || "Título sin especificar";
+  const fuente = val("fuente");
+  const url = val("url");
+  const volNum = val("volNum");
+  const paginas = val("paginas");
+
+  let apa = "", mla = "";
+
+  if(tipo === "libro"){
+    apa = `${autor} (${anio}). ${titulo}. ${fuente}.`;
+    mla = `${autor}. ${titulo}. ${fuente}, ${anio}.`;
+  } else if(tipo === "web"){
+    apa = `${autor} (${anio}). ${titulo}. ${fuente}. ${url}`;
+    mla = `${autor}. "${titulo}." ${fuente}, ${anio}, ${url}.`;
+  } else {
+    apa = `${autor} (${anio}). ${titulo}. ${fuente}${volNum ? ", " + volNum : ""}${paginas ? ", " + paginas : ""}.`;
+    mla = `${autor}. "${titulo}." ${fuente}${volNum ? ", vol. " + volNum : ""}, ${anio}${paginas ? ", pp. " + paginas : ""}.`;
+  }
+
+  document.getElementById("apaOut").textContent = apa;
+  document.getElementById("mlaOut").textContent = mla;
+}
+
+document.getElementById("generarBtn").addEventListener("click", generar);
+
+document.querySelectorAll("[data-copy]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const text = document.getElementById(btn.dataset.copy).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const old = btn.textContent; btn.textContent = "¡Copiado!";
+      setTimeout(() => btn.textContent = old, 1500);
+    });
+  });
+});
+</script>
+
+</body>
+</html>

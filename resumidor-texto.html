@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumidor de Textos Online Gratis — Resumen Automático | Aula10</title>
+<meta name="description" content="Pega un texto largo y obtén automáticamente las frases más relevantes como resumen. Ideal para apuntes, artículos y lecturas largas. Gratis y sin registro.">
+<link rel="canonical" href="https://tu-usuario.github.io/aula10/resumidor-texto.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Resumidor de Textos Online | Aula10">
+<meta property="og:description" content="Obtén las frases más relevantes de cualquier texto en segundos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  #sourceText{min-height:260px;}
+  .controls-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:14px 0;}
+  .controls-row label{margin:0;}
+  #summaryOutput{white-space:pre-line;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo">Aula<span class="dot">10</span></a>
+    <nav class="mainnav">
+      <a href="calculadora.html">Calculadora</a>
+      <a href="ruleta.html">Ruleta</a>
+      <a href="contador-palabras.html">Contador</a>
+      <a href="resumidor-texto.html" class="active">Resumidor</a>
+      <a href="nota-media.html">Nota media</a>
+      <a href="citas.html">Citas</a>
+      <a href="pomodoro.html">Pomodoro</a>
+      <a href="conversor-notas.html">Conversor notas</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:32px;">
+  <p class="crumb"><a href="index.html">Inicio</a> / Resumidor de textos</p>
+  <h1 style="font-size:30px;">Resumidor de textos</h1>
+  <p style="max-width:64ch;">Pega un texto largo (un artículo, un tema de apuntes, una lectura) y esta herramienta selecciona automáticamente las frases con más peso, usando la frecuencia de las palabras clave del propio texto. No inventa información: solo extrae y ordena las frases más relevantes que ya están escritas.</p>
+</div>
+
+<div class="wrap" style="padding-bottom:56px;">
+  <div class="grid-2">
+    <div class="card">
+      <label for="sourceText">Texto original</label>
+      <textarea id="sourceText" placeholder="Pega aquí tu texto..."></textarea>
+      <div class="controls-row">
+        <label for="numSentences" style="margin:0;">Frases en el resumen:</label>
+        <input type="number" id="numSentences" value="3" min="1" max="15" style="width:70px;">
+        <button class="btn" id="summarizeBtn">Resumir</button>
+      </div>
+    </div>
+    <div class="card">
+      <label>Resumen</label>
+      <div class="result-box" id="summaryOutput">Tu resumen aparecerá aquí.</div>
+      <button class="btn secondary small" id="copyBtn" style="margin-top:12px;">Copiar resumen</button>
+    </div>
+  </div>
+</div>
+
+<section class="block wrap">
+  <h2>Cómo funciona este resumidor</h2>
+  <p>La herramienta cuenta cuántas veces aparece cada palabra importante del texto (ignorando palabras muy comunes como "de", "que" o "el") y da una puntuación a cada frase según las palabras relevantes que contiene. Después escoge las frases con mayor puntuación y las muestra en su orden original. Es un método rápido y transparente, muy usado en resúmenes automáticos, aunque no sustituye una lectura completa si necesitas entender matices o razonamientos complejos del texto.</p>
+  <div class="faq">
+    <details>
+      <summary>¿El resumen usa inteligencia artificial?</summary>
+      <p>No. Usa un método estadístico clásico (frecuencia de palabras) que se ejecuta al instante en tu navegador, sin enviar tu texto a ningún servidor externo.</p>
+    </details>
+    <details>
+      <summary>¿Funciona con cualquier tipo de texto?</summary>
+      <p>Funciona mejor con textos informativos o expositivos (artículos, apuntes, noticias). Con textos muy narrativos o poéticos el resultado puede ser menos representativo.</p>
+    </details>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Herramientas</h4><ul>
+        <li><a href="calculadora.html">Calculadora</a></li>
+        <li><a href="ruleta.html">Ruleta aleatoria</a></li>
+        <li><a href="contador-palabras.html">Contador de palabras</a></li>
+        <li><a href="resumidor-texto.html">Resumidor de textos</a></li>
+      </ul></div>
+      <div><h4>Más herramientas</h4><ul>
+        <li><a href="nota-media.html">Calculadora de nota media</a></li>
+        <li><a href="citas.html">Generador de citas APA/MLA</a></li>
+        <li><a href="pomodoro.html">Temporizador Pomodoro</a></li>
+        <li><a href="conversor-notas.html">Conversor de notas</a></li>
+      </ul></div>
+      <div><h4>Aula10</h4><ul><li><a href="index.html">Inicio</a></li></ul></div>
+    </div>
+    <p class="fine">Aula10 — herramientas gratuitas para estudiantes. Tu texto no se envía a ningún servidor.</p>
+  </div>
+</footer>
+
+<script>
+const STOPWORDS = new Set(("de la que el en y a los del se las por un para con no una su al lo como más pero sus le ya o " +
+"este sí porque esta entre cuando muy sin sobre también me hasta hay donde quien desde todo nos durante todos uno les ni " +
+"contra otros ese eso ante ellos e esto mí antes algunos qué unos yo otro otras otra él tanto esa estos mucho quienes nada " +
+"muchos cual poco ella estar estas algunas algo nosotros mi mis tú te ti tu tus ellas nosotras vosotros vosotras os es son " +
+"fue ser había han ha está están era eran seré serán soy eres somos sois fui fuiste fuimos fueron siendo sido tener tengo " +
+"tiene tenemos tienen habia asi aun bien cada cómo dentro donde ese esos esas mismo mismos misma mismas").split(" "));
+
+function splitSentences(text){
+  return text.replace(/\n+/g," ").split(/(?<=[.!?])\s+/).map(s=>s.trim()).filter(s => s.length > 0);
+}
+function tokenize(sentence){
+  return sentence.toLowerCase()
+    .replace(/[^a-záéíóúüñ0-9\s]/gi," ")
+    .split(/\s+/)
+    .filter(w => w.length > 2 && !STOPWORDS.has(w));
+}
+
+function summarize(text, n){
+  const sentences = splitSentences(text);
+  if(sentences.length <= n) return sentences.join(" ");
+
+  const freq = {};
+  sentences.forEach(s => tokenize(s).forEach(w => { freq[w] = (freq[w]||0) + 1; }));
+
+  const scored = sentences.map((s, idx) => {
+    const words = tokenize(s);
+    const score = words.length ? words.reduce((sum,w) => sum + (freq[w]||0), 0) / words.length : 0;
+    return { idx, s, score };
+  });
+
+  const top = scored.slice().sort((a,b) => b.score - a.score).slice(0, n);
+  top.sort((a,b) => a.idx - b.idx);
+  return top.map(t => t.s).join(" ");
+}
+
+document.getElementById("summarizeBtn").addEventListener("click", () => {
+  const text = document.getElementById("sourceText").value.trim();
+  const n = Math.max(1, parseInt(document.getElementById("numSentences").value) || 3);
+  const out = document.getElementById("summaryOutput");
+  if(!text){ out.textContent = "Pega primero un texto para resumir."; return; }
+  out.textContent = summarize(text, n);
+});
+
+document.getElementById("copyBtn").addEventListener("click", () => {
+  const text = document.getElementById("summaryOutput").textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const b = document.getElementById("copyBtn");
+    const old = b.textContent; b.textContent = "¡Copiado!";
+    setTimeout(() => b.textContent = old, 1500);
+  });
+});
+</script>
+
+</body>
+</html>

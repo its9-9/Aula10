@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conversor de Notas Españolas a GPA y ECTS | Aula10</title>
+<meta name="description" content="Convierte tu nota española (0-10) a su equivalencia orientativa en el sistema ECTS (A-F) y en GPA americano. Útil para Erasmus, intercambios y solicitudes internacionales.">
+<link rel="canonical" href="https://tu-usuario.github.io/aula10/conversor-notas.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Conversor de Notas a GPA y ECTS | Aula10">
+<meta property="og:description" content="Convierte tu nota española a su equivalencia orientativa en GPA y ECTS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo">Aula<span class="dot">10</span></a>
+    <nav class="mainnav">
+      <a href="calculadora.html">Calculadora</a>
+      <a href="ruleta.html">Ruleta</a>
+      <a href="contador-palabras.html">Contador</a>
+      <a href="resumidor-texto.html">Resumidor</a>
+      <a href="nota-media.html">Nota media</a>
+      <a href="citas.html">Citas</a>
+      <a href="pomodoro.html">Pomodoro</a>
+      <a href="conversor-notas.html" class="active">Conversor notas</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:32px;">
+  <p class="crumb"><a href="index.html">Inicio</a> / Conversor de notas</p>
+  <h1 style="font-size:30px;">Conversor de notas españolas a GPA / ECTS</h1>
+  <p style="max-width:64ch;">Convierte una nota del sistema español (0-10) a su equivalencia orientativa en la escala ECTS europea (A-F) y en GPA americano. Muy usado por estudiantes de Erasmus o que solicitan universidades en el extranjero.</p>
+</div>
+
+<div class="wrap" style="padding-bottom:56px;">
+  <div class="grid-2">
+    <div class="card">
+      <div class="field">
+        <label for="notaInput">Tu nota española (0 a 10)</label>
+        <input type="number" id="notaInput" min="0" max="10" step="0.1" value="8.5">
+      </div>
+      <button class="btn block" id="convertBtn">Convertir</button>
+    </div>
+    <div class="card">
+      <div class="result-box">
+        <div class="result-big" id="resultLetra">B</div>
+        <div class="result-sub" id="resultCategoria">Notable</div>
+        <div class="stat-row">
+          <div class="stat-chip"><div class="n" id="resultGPA">3.3</div><div class="l">GPA aproximado</div></div>
+          <div class="stat-chip"><div class="n" id="resultECTS">B</div><div class="l">Letra ECTS</div></div>
+        </div>
+      </div>
+      <p class="note">Esta equivalencia es orientativa y se basa en la tabla general del sistema ECTS. La conversión oficial la determina siempre el centro o universidad de destino, y puede variar entre programas de movilidad.</p>
+    </div>
+  </div>
+</div>
+
+<section class="block wrap">
+  <h2>Tabla de equivalencia usada</h2>
+  <table style="width:100%;border-collapse:collapse;font-size:14.5px;">
+    <thead>
+      <tr style="text-align:left;color:var(--ink-soft);font-size:12.5px;text-transform:uppercase;">
+        <th style="padding:6px 10px;">Nota España (0-10)</th>
+        <th style="padding:6px 10px;">Categoría</th>
+        <th style="padding:6px 10px;">Letra ECTS</th>
+        <th style="padding:6px 10px;">GPA aprox.</th>
+      </tr>
+    </thead>
+    <tbody id="tablaBody" style="background:#fff;"></tbody>
+  </table>
+  <p class="note">Basado en la tabla de equivalencias del Ministerio de Educación y Formación Profesional para el sistema ECTS.</p>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Herramientas</h4><ul>
+        <li><a href="calculadora.html">Calculadora</a></li>
+        <li><a href="ruleta.html">Ruleta aleatoria</a></li>
+        <li><a href="contador-palabras.html">Contador de palabras</a></li>
+        <li><a href="resumidor-texto.html">Resumidor de textos</a></li>
+      </ul></div>
+      <div><h4>Más herramientas</h4><ul>
+        <li><a href="nota-media.html">Calculadora de nota media</a></li>
+        <li><a href="citas.html">Generador de citas APA/MLA</a></li>
+        <li><a href="pomodoro.html">Temporizador Pomodoro</a></li>
+        <li><a href="conversor-notas.html">Conversor de notas</a></li>
+      </ul></div>
+      <div><h4>Aula10</h4><ul><li><a href="index.html">Inicio</a></li></ul></div>
+    </div>
+    <p class="fine">Aula10 — herramientas gratuitas para estudiantes.</p>
+  </div>
+</footer>
+
+<script>
+const TABLE = [
+  { min:9.0, max:10.01, cat:"Matrícula de Honor / Sobresaliente", ects:"A", gpa:4.0 },
+  { min:8.0, max:9.0,   cat:"Notable alto", ects:"B", gpa:3.3 },
+  { min:7.0, max:8.0,   cat:"Notable", ects:"C", gpa:2.7 },
+  { min:6.0, max:7.0,   cat:"Aprobado alto", ects:"D", gpa:2.0 },
+  { min:5.0, max:6.0,   cat:"Aprobado", ects:"E", gpa:1.0 },
+  { min:0,   max:5.0,   cat:"Suspenso", ects:"F", gpa:0.0 }
+];
+
+function findRow(nota){
+  return TABLE.find(r => nota >= r.min && nota < r.max) || TABLE[TABLE.length-1];
+}
+
+function convert(){
+  let nota = parseFloat(document.getElementById("notaInput").value.replace(",","."));
+  if(isNaN(nota)) nota = 0;
+  nota = Math.max(0, Math.min(10, nota));
+  const row = findRow(nota === 10 ? 9.999 : nota);
+  const finalRow = nota >= 9 ? TABLE[0] : row;
+  document.getElementById("resultLetra").textContent = finalRow.ects;
+  document.getElementById("resultCategoria").textContent = finalRow.cat;
+  document.getElementById("resultGPA").textContent = finalRow.gpa.toFixed(1);
+  document.getElementById("resultECTS").textContent = finalRow.ects;
+}
+
+function buildTable(){
+  const tbody = document.getElementById("tablaBody");
+  tbody.innerHTML = TABLE.map(r => {
+    const rango = r.max > 10 ? `${r.min.toFixed(1)} - 10` : `${r.min.toFixed(1)} - ${r.max.toFixed(1)}`;
+    return `<tr style="border-top:1px solid var(--line);">
+      <td style="padding:8px 10px;">${rango}</td>
+      <td style="padding:8px 10px;">${r.cat}</td>
+      <td style="padding:8px 10px;font-weight:700;">${r.ects}</td>
+      <td style="padding:8px 10px;">${r.gpa.toFixed(1)}</td>
+    </tr>`;
+  }).join("");
+}
+
+document.getElementById("convertBtn").addEventListener("click", convert);
+buildTable();
+convert();
+</script>
+
+</body>
+</html>

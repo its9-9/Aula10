@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruleta Aleatoria Online — Sorteo de Nombres y Opciones | Aula10</title>
+<meta name="description" content="Crea una ruleta aleatoria gratis con tus propias opciones: sortea turnos, elige quién responde, decide entre varias opciones. Escribe tu lista y gira la ruleta.">
+<link rel="canonical" href="https://tu-usuario.github.io/aula10/ruleta.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ruleta Aleatoria Online | Aula10">
+<meta property="og:description" content="Escribe tus opciones y deja que la ruleta decida. Gratis, sin registro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .ruleta-layout{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start;}
+  @media (max-width:800px){ .ruleta-layout{grid-template-columns:1fr;} }
+  .wheel-stage{display:flex;flex-direction:column;align-items:center;gap:18px;}
+  .wheel-pointer{
+    width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;
+    border-top:22px solid var(--ink);margin-bottom:-4px;z-index:2;
+  }
+  .wheel-outer{
+    position:relative;width:320px;height:320px;border-radius:50%;
+    box-shadow:0 0 0 8px #fff, 0 0 0 10px var(--line), var(--shadow);
+  }
+  .wheel{
+    width:100%;height:100%;border-radius:50%;position:relative;overflow:hidden;
+    transition:transform 4.2s cubic-bezier(.17,.67,.16,1);
+  }
+  .wheel .label{
+    position:absolute;top:50%;left:50%;transform-origin:0 0;
+    font-size:12.5px;font-weight:700;color:#fff;
+    text-shadow:0 1px 2px rgba(0,0,0,.35);
+    width:130px;
+  }
+  .wheel-center{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:20px;height:20px;background:#fff;border-radius:50%;border:2px solid var(--line);z-index:3;
+  }
+  #winnerBox{min-height:34px;font-family:'Sora',sans-serif;font-weight:700;font-size:20px;text-align:center;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo">Aula<span class="dot">10</span></a>
+    <nav class="mainnav">
+      <a href="calculadora.html">Calculadora</a>
+      <a href="ruleta.html" class="active">Ruleta</a>
+      <a href="contador-palabras.html">Contador</a>
+      <a href="resumidor-texto.html">Resumidor</a>
+      <a href="nota-media.html">Nota media</a>
+      <a href="citas.html">Citas</a>
+      <a href="pomodoro.html">Pomodoro</a>
+      <a href="conversor-notas.html">Conversor notas</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:32px;">
+  <p class="crumb"><a href="index.html">Inicio</a> / Ruleta aleatoria</p>
+  <h1 style="font-size:30px;">Ruleta aleatoria online</h1>
+  <p style="max-width:60ch;">Escribe una opción por línea (nombres, preguntas, decisiones...) y gira la ruleta para que elija una al azar.</p>
+</div>
+
+<div class="wrap" style="padding-bottom:56px;">
+  <div class="ruleta-layout">
+
+    <div class="wheel-stage card">
+      <div class="wheel-pointer"></div>
+      <div class="wheel-outer">
+        <div class="wheel" id="wheel"></div>
+        <div class="wheel-center"></div>
+      </div>
+      <button class="btn" id="spinBtn">Girar la ruleta</button>
+      <div id="winnerBox"></div>
+    </div>
+
+    <div class="card">
+      <label for="optionsInput">Tus opciones (una por línea)</label>
+      <textarea id="optionsInput" rows="10">Ana
+Luis
+Marta
+Pablo
+Sofía</textarea>
+      <button class="btn secondary block" id="updateBtn" style="margin-top:12px;">Actualizar ruleta</button>
+      <p class="note">Mínimo 2 opciones, máximo 12 para que se lean bien en la ruleta.</p>
+    </div>
+
+  </div>
+</div>
+
+<section class="block wrap">
+  <h2>Ideas de uso en clase o estudiando</h2>
+  <div class="faq">
+    <details>
+      <summary>¿Para qué puedo usar esta ruleta?</summary>
+      <p>Para decidir quién sale a la pizarra, repartir turnos de exposición al azar, elegir un tema de estudio entre varios, o simplemente para decidir algo sin discutir.</p>
+    </details>
+    <details>
+      <summary>¿Todas las opciones tienen la misma probabilidad?</summary>
+      <p>Sí. La ruleta divide el círculo en partes iguales según el número de opciones que escribas, así que todas tienen exactamente la misma probabilidad de salir.</p>
+    </details>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Herramientas</h4><ul>
+        <li><a href="calculadora.html">Calculadora</a></li>
+        <li><a href="ruleta.html">Ruleta aleatoria</a></li>
+        <li><a href="contador-palabras.html">Contador de palabras</a></li>
+        <li><a href="resumidor-texto.html">Resumidor de textos</a></li>
+      </ul></div>
+      <div><h4>Más herramientas</h4><ul>
+        <li><a href="nota-media.html">Calculadora de nota media</a></li>
+        <li><a href="citas.html">Generador de citas APA/MLA</a></li>
+        <li><a href="pomodoro.html">Temporizador Pomodoro</a></li>
+        <li><a href="conversor-notas.html">Conversor de notas</a></li>
+      </ul></div>
+      <div><h4>Aula10</h4><ul><li><a href="index.html">Inicio</a></li></ul></div>
+    </div>
+    <p class="fine">Aula10 — herramientas gratuitas para estudiantes. Tus opciones no se guardan ni se envían a ningún servidor.</p>
+  </div>
+</footer>
+
+<script>
+const wheelEl = document.getElementById("wheel");
+const optionsInput = document.getElementById("optionsInput");
+const winnerBox = document.getElementById("winnerBox");
+const palette = ["#E07B1E","#2C8C82","#3D5A80","#C1447E","#6B8E23","#4C6EF5","#B75F0F","#7A5195","#DB8A00","#1B998B","#D6493B","#3C6E71"];
+
+let options = [];
+let currentRotation = 0;
+
+function getOptions(){
+  return optionsInput.value.split("\n").map(s => s.trim()).filter(Boolean).slice(0,12);
+}
+
+function buildWheel(){
+  options = getOptions();
+  wheelEl.querySelectorAll(".label").forEach(l => l.remove());
+  if(options.length < 2){
+    wheelEl.style.background = "#eee";
+    winnerBox.textContent = "Escribe al menos 2 opciones";
+    return;
+  }
+  winnerBox.textContent = "";
+  const seg = 360 / options.length;
+  let gradientParts = [];
+  options.forEach((opt, i) => {
+    const color = palette[i % palette.length];
+    gradientParts.push(`${color} ${i*seg}deg ${(i+1)*seg}deg`);
+  });
+  wheelEl.style.background = `conic-gradient(${gradientParts.join(",")})`;
+
+  options.forEach((opt, i) => {
+    const center = i*seg + seg/2;
+    const label = document.createElement("div");
+    label.className = "label";
+    label.textContent = opt;
+    let displayAngle = center;
+    let flip = (center > 90 && center < 270);
+    label.style.transform = `rotate(${center}deg) translate(14px,-7px) ${flip ? "rotate(180deg) translateX(-124px)" : ""}`;
+    label.style.textAlign = flip ? "right" : "left";
+    wheelEl.appendChild(label);
+  });
+}
+
+function spin(){
+  if(options.length < 2) return;
+  const seg = 360 / options.length;
+  const winnerIndex = Math.floor(Math.random() * options.length);
+  const centerAngle = winnerIndex*seg + seg/2;
+  const currentMod = ((currentRotation % 360) + 360) % 360;
+  const neededFinalMod = (360 - centerAngle + 360) % 360;
+  let delta = neededFinalMod - currentMod;
+  if(delta <= 0) delta += 360;
+  currentRotation += 5*360 + delta;
+  wheelEl.style.transform = `rotate(${currentRotation}deg)`;
+  winnerBox.textContent = "";
+  setTimeout(() => {
+    winnerBox.textContent = "🎉 " + options[winnerIndex];
+  }, 4300);
+}
+
+document.getElementById("updateBtn").addEventListener("click", buildWheel);
+document.getElementById("spinBtn").addEventListener("click", spin);
+
+buildWheel();
+</script>
+
+</body>
+</html>

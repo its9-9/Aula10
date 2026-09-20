@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temporizador Pomodoro Online Gratis para Estudiar | Aula10</title>
+<meta name="description" content="Temporizador Pomodoro gratuito para estudiar: bloques de 25 minutos de concentración y 5 de descanso, totalmente personalizable. Sin registro ni instalación.">
+<link rel="canonical" href="https://tu-usuario.github.io/aula10/pomodoro.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Temporizador Pomodoro para Estudiar | Aula10">
+<meta property="og:description" content="Estudia en bloques de concentración con descansos. Gratis, personalizable.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .pomo-wrap{max-width:420px;margin:0 auto;text-align:center;}
+  .pomo-mode{font-family:'Sora',sans-serif;font-weight:700;font-size:14px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:8px;}
+  .pomo-time{font-family:'Sora',sans-serif;font-weight:800;font-size:78px;line-height:1;color:var(--ink);margin:10px 0 22px;}
+  .pomo-buttons{display:flex;gap:10px;justify-content:center;margin-bottom:24px;}
+  .pomo-settings{display:flex;gap:14px;justify-content:center;margin-top:22px;}
+  .pomo-settings .field{max-width:120px;}
+  .pomo-cycles{font-size:14px;color:var(--ink-soft);margin-top:14px;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo">Aula<span class="dot">10</span></a>
+    <nav class="mainnav">
+      <a href="calculadora.html">Calculadora</a>
+      <a href="ruleta.html">Ruleta</a>
+      <a href="contador-palabras.html">Contador</a>
+      <a href="resumidor-texto.html">Resumidor</a>
+      <a href="nota-media.html">Nota media</a>
+      <a href="citas.html">Citas</a>
+      <a href="pomodoro.html" class="active">Pomodoro</a>
+      <a href="conversor-notas.html">Conversor notas</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:32px;">
+  <p class="crumb"><a href="index.html">Inicio</a> / Temporizador Pomodoro</p>
+  <h1 style="font-size:30px;">Temporizador Pomodoro</h1>
+  <p style="max-width:60ch;">La técnica Pomodoro consiste en estudiar en bloques cortos de concentración total, seguidos de un descanso breve. Por defecto: 25 minutos de estudio y 5 de descanso.</p>
+</div>
+
+<div class="wrap" style="padding-bottom:56px;">
+  <div class="card pomo-wrap">
+    <div class="pomo-mode" id="pomoMode">Estudio</div>
+    <div class="pomo-time" id="pomoTime">25:00</div>
+    <div class="pomo-buttons">
+      <button class="btn" id="startBtn">Empezar</button>
+      <button class="btn secondary" id="resetBtn">Reiniciar</button>
+    </div>
+    <div class="pomo-cycles">Bloques de estudio completados: <strong id="cycleCount">0</strong></div>
+
+    <div class="pomo-settings">
+      <div class="field">
+        <label for="workMin">Minutos estudio</label>
+        <input type="number" id="workMin" value="25" min="1" max="90">
+      </div>
+      <div class="field">
+        <label for="breakMin">Minutos descanso</label>
+        <input type="number" id="breakMin" value="5" min="1" max="60">
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="block wrap">
+  <h2>Cómo usar la técnica Pomodoro</h2>
+  <div class="faq">
+    <details>
+      <summary>¿Por qué 25 minutos?</summary>
+      <p>Es el intervalo clásico propuesto por esta técnica: suficientemente largo para avanzar de verdad, pero corto para mantener la concentración sin agotarte.</p>
+    </details>
+    <details>
+      <summary>¿Puedo cambiar la duración?</summary>
+      <p>Sí, cambia los minutos de estudio y descanso en los campos de abajo antes de pulsar "Empezar".</p>
+    </details>
+    <details>
+      <summary>¿Suena algo cuando termina el tiempo?</summary>
+      <p>Sí, escucharás un aviso sonoro corto y el temporizador cambiará automáticamente entre estudio y descanso.</p>
+    </details>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Herramientas</h4><ul>
+        <li><a href="calculadora.html">Calculadora</a></li>
+        <li><a href="ruleta.html">Ruleta aleatoria</a></li>
+        <li><a href="contador-palabras.html">Contador de palabras</a></li>
+        <li><a href="resumidor-texto.html">Resumidor de textos</a></li>
+      </ul></div>
+      <div><h4>Más herramientas</h4><ul>
+        <li><a href="nota-media.html">Calculadora de nota media</a></li>
+        <li><a href="citas.html">Generador de citas APA/MLA</a></li>
+        <li><a href="pomodoro.html">Temporizador Pomodoro</a></li>
+        <li><a href="conversor-notas.html">Conversor de notas</a></li>
+      </ul></div>
+      <div><h4>Aula10</h4><ul><li><a href="index.html">Inicio</a></li></ul></div>
+    </div>
+    <p class="fine">Aula10 — herramientas gratuitas para estudiantes.</p>
+  </div>
+</footer>
+
+<script>
+let mode = "work"; // work | break
+let secondsLeft = 25*60;
+let running = false;
+let timerId = null;
+let cycles = 0;
+
+const timeEl = document.getElementById("pomoTime");
+const modeEl = document.getElementById("pomoMode");
+const startBtn = document.getElementById("startBtn");
+const cycleEl = document.getElementById("cycleCount");
+const workMinInput = document.getElementById("workMin");
+const breakMinInput = document.getElementById("breakMin");
+
+function render(){
+  const m = Math.floor(secondsLeft/60).toString().padStart(2,"0");
+  const s = (secondsLeft%60).toString().padStart(2,"0");
+  timeEl.textContent = `${m}:${s}`;
+  modeEl.textContent = mode === "work" ? "Estudio" : "Descanso";
+}
+
+function beep(){
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.frequency.value = 880;
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.35);
+  }catch(e){}
+}
+
+function switchMode(){
+  if(mode === "work"){
+    cycles++; cycleEl.textContent = cycles;
+    mode = "break";
+    secondsLeft = Math.max(1, parseInt(breakMinInput.value)||5) * 60;
+  } else {
+    mode = "work";
+    secondsLeft = Math.max(1, parseInt(workMinInput.value)||25) * 60;
+  }
+  render();
+}
+
+function tick(){
+  secondsLeft--;
+  if(secondsLeft < 0){
+    beep();
+    switchMode();
+    return;
+  }
+  render();
+}
+
+function start(){
+  if(running) return;
+  running = true;
+  startBtn.textContent = "Pausar";
+  timerId = setInterval(tick, 1000);
+}
+function pause(){
+  running = false;
+  startBtn.textContent = "Continuar";
+  clearInterval(timerId);
+}
+function reset(){
+  pause();
+  startBtn.textContent = "Empezar";
+  mode = "work";
+  secondsLeft = Math.max(1, parseInt(workMinInput.value)||25) * 60;
+  render();
+}
+
+startBtn.addEventListener("click", () => running ? pause() : start());
+document.getElementById("resetBtn").addEventListener("click", reset);
+workMinInput.addEventListener("change", () => { if(!running && mode==="work") reset(); });
+breakMinInput.addEventListener("change", () => { if(!running && mode==="break"){ secondsLeft = Math.max(1, parseInt(breakMinInput.value)||5)*60; render(); } });
+
+render();
+</script>
+
+</body>
+</html>
